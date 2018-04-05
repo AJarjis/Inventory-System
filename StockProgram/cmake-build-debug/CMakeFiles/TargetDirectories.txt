@@ -1,0 +1,3 @@
+C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/cmake-build-debug/CMakeFiles/StockProgram.dir
+C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/cmake-build-debug/CMakeFiles/rebuild_cache.dir
