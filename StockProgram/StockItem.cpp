@@ -23,7 +23,7 @@
  * @param amount                stock amount
  * @param price                 unit price of item
  */
-StockItem::StockItem(string &code, int amount, int price) {
+StockItem::StockItem(const string &code, int amount, int price) {
     this->stockCode = code;
 
     this->setStockAmount(amount);
@@ -105,7 +105,8 @@ void StockItem::setUnitPrice(int price) {
  * @param price                 unit price of item
  * @param resistanceCode        code representing resistance
  */
-Resistor::Resistor(string code, int amount, int price, string resistanceCode)
+Resistor::Resistor(const string &code, int amount, int price,
+                   const string &resistanceCode)
         : StockItem(code, price, amount) {
     this->resistance = calculateResistance(resistanceCode);
 }
@@ -140,6 +141,7 @@ void Resistor::setResistance(const string &resistanceCode) {
 /**
  * Calculates the resistance from a resistance code
  *
+ * @param resistanceCode        resistor code to calculate
  * @return                      resistance of item
  */
 double Resistor::calculateResistance(string resistanceCode) {
@@ -192,7 +194,8 @@ ostream &operator<<(ostream &os, Resistor &resistor) {
  * @param price                     unit price of item
  * @param capacitance               capacitance as string e.g 100pf, 10nf
  */
-Capacitor::Capacitor(string code, int amount, int price, string capacitance)
+Capacitor::Capacitor(const string &code, int amount, int price,
+                     const string &capacitance)
         : StockItem(code, price, amount) {
     this->capacitance = convertToPicoFarads(capacitance);
 }
@@ -220,7 +223,7 @@ int Capacitor::getCapacitance() const {
  *
  * @param capacitance               capacitance as string e.g 100pf, 10nf
  */
-void Capacitor::setCapacitance(string capacitance) {
+void Capacitor::setCapacitance(string &capacitance) {
     this->capacitance = convertToPicoFarads(capacitance);
 }
 
@@ -230,7 +233,7 @@ void Capacitor::setCapacitance(string capacitance) {
  * @param capacitance               capacitance as string e.g 100pf, 10nf
  * @return                          capacitance of item in picofarads
  */
-double Capacitor::convertToPicoFarads(string capacitance) const {
+double Capacitor::convertToPicoFarads(string capacitance) {
     string picoFaradString;
     double picoFaradAmount = 0;
 
@@ -280,7 +283,7 @@ ostream &operator<<(ostream &os, Capacitor &capacitor) {
               << "Stock Code: " << capacitor.stockCode << endl
               << "Stock Amount: " << capacitor.stockAmount << endl
               << "Unit Price: " << capacitor.unitPrice << "p" << endl
-              << "Total Resistance: " << capacitor.capacitance << "pf" << endl;
+              << "Total Capacitance: " << capacitor.capacitance << "pf" << endl;
 }
 
 // DIODE CODE
@@ -292,7 +295,7 @@ ostream &operator<<(ostream &os, Capacitor &capacitor) {
  * @param amount                    stock amount
  * @param price                     unit price of item
  */
-Diode::Diode(string code, int amount, int price)
+Diode::Diode(const string &code, int amount, int price)
         : StockItem(code, price, amount) {}
 
 /**
@@ -308,7 +311,7 @@ string Diode::getComponentType() {
  * Overloads the output operator to stream details specific to a diode.
  *
  * @param os                        the output stream to send info to
- * @param diode                 diode to stream info about
+ * @param diode                     diode to stream info about
  * @return                          outstream with capacitor info
  */
 ostream &operator<<(ostream &os, Diode &diode) {
@@ -316,6 +319,28 @@ ostream &operator<<(ostream &os, Diode &diode) {
               << "Stock Code: " << diode.stockCode << endl
               << "Stock Amount: " << diode.stockAmount << endl
               << "Unit Price: " << diode.unitPrice << "p" << endl;
+}
+
+// DEVICE TYPE (ENUM) CODE
+
+/**
+ * Overloads the output operator to stream name of a device.
+ *
+ * @param os                        the output stream to send info to
+ * @param deviceType                deviceType to stream name about
+ * @return                          outstream with deviceType name
+ */
+ostream &operator<<(ostream &os, const Device &deviceType) {
+    switch (deviceType) {
+        case Device::NPN :
+            return os << "NPN";
+        case Device::PNP :
+            return os << "PNP";
+        case Device::FET :
+            return os << "FET";
+        default:
+            return os;
+    }
 }
 
 // TRANSISTOR CODE
@@ -328,9 +353,10 @@ ostream &operator<<(ostream &os, Diode &diode) {
  * @param price                     unit price of item
  * @param deviceType                device type of transistor
  */
-Transistor::Transistor(string code, int amount, int price, string deviceType)
+Transistor::Transistor(const string &code, int amount, int price,
+                       const string &deviceType)
         : StockItem(code, amount, price) {
-    this->deviceType = deviceType;
+    this->setDeviceType(deviceType);
 }
 
 /**
@@ -347,7 +373,7 @@ string Transistor::getComponentType() {
  *
  * @return                          device type of transistor
  */
-string Transistor::getDeviceType() const {
+Device Transistor::getDeviceType() const {
     return this->deviceType;
 }
 
@@ -356,8 +382,21 @@ string Transistor::getDeviceType() const {
  *
  * @param deviceType                new device type of transistor
  */
-void Transistor::setDeviceType(string deviceType) {
-    this->deviceType = deviceType;
+void Transistor::setDeviceType(const string &deviceType) {
+    Device newDeviceType;
+
+    // Converts from string to Device enum type
+    if (deviceType == "NPN") {
+        newDeviceType = Device::NPN;
+    } else if (deviceType == "PNP") {
+        newDeviceType = Device::PNP;
+    } else if (deviceType == "FET") {
+        newDeviceType = Device::FET;
+    } else {
+        throw invalid_argument("Invalid device type for transistor.");
+    }
+
+    this->deviceType = newDeviceType;
 }
 
 /**
@@ -372,7 +411,7 @@ ostream &operator<<(ostream &os, Transistor &transistor) {
               << "Stock Code: " << transistor.stockCode << endl
               << "Stock Amount: " << transistor.stockAmount << endl
               << "Unit Price: " << transistor.unitPrice << "p" << endl
-              << "Unit Price: " << transistor.deviceType << endl;
+              << "Device Type: " << transistor.deviceType << endl;
 }
 
 // INTEGRATED CIRCUITS CODE
@@ -385,8 +424,8 @@ ostream &operator<<(ostream &os, Transistor &transistor) {
  * @param price                     unit price of item
  * @param description               integrated circuit description
  */
-IntegratedCircuit::IntegratedCircuit(string code, int amount, int price,
-                                     string description)
+IntegratedCircuit::IntegratedCircuit(const string &code, int amount, int price,
+                                     const string &description)
         : StockItem(code, amount, price) {
     this->description = description;
 }
@@ -414,7 +453,7 @@ string IntegratedCircuit::getDescription() const {
  *
  * @param description               new integrated circuit description
  */
-void IntegratedCircuit::setDescription(string description) {
+void IntegratedCircuit::setDescription(const string &description) {
     this->description = description;
 }
 
@@ -431,5 +470,5 @@ ostream &operator<<(ostream &os, IntegratedCircuit &integratedCircuit) {
               << endl << "Stock Code: " << integratedCircuit.stockCode << endl
               << "Stock Amount: " << integratedCircuit.stockAmount << endl
               << "Unit Price: " << integratedCircuit.unitPrice << "p" << endl
-              << "Unit Price: " << integratedCircuit.description << endl;
+              << "Description: " << integratedCircuit.description << endl;
 }

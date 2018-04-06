@@ -19,6 +19,8 @@ C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockP
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.h
 iostream
 -
+iomanip
+-
 
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockProgram.cpp
 cstdlib

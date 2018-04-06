@@ -16,6 +16,7 @@
 #define STOCKITEM_H
 
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -34,7 +35,7 @@ protected:
     int unitPrice;
 
     // StockItem Constructor
-    StockItem(string &code, int amount, int price);
+    StockItem(const string &code, int amount, int price);
 
 public:
     // Retrieves the component type of a stock item - abstract method
@@ -69,7 +70,8 @@ private:
 
 public:
     // Resistor Constructor
-    Resistor(string code, int amount, int price, string resistanceCode);
+    Resistor(const string &code, int amount, int price,
+             const string &resistanceCode);
 
     // Retrieves the component type (resistor)
     string getComponentType() override;
@@ -97,7 +99,8 @@ private:
 
 public:
     // Capacitor constructor
-    Capacitor(string code, int amount, int price, string capacitance);
+    Capacitor(const string &code, int amount, int price,
+              const string &capacitance);
 
     // Retrieves the component type (capacitor)
     string getComponentType() override;
@@ -106,10 +109,10 @@ public:
     int getCapacitance() const;
 
     // Set capacitance amount of capacitor
-    void setCapacitance(string capacitance);
+    void setCapacitance(string &capacitance);
 
     // Converts capacitance string into picofarads
-    double convertToPicoFarads(string capacitance) const;
+    double convertToPicoFarads(string capacitance);
 
     // Output operator for capacitor
     friend ostream &operator<<(ostream &os, Capacitor &capacitor);
@@ -122,7 +125,7 @@ class Diode : public StockItem {
 private:
 public:
     // Diode constructor
-    Diode(string code, int amount, int price);
+    Diode(const string &code, int amount, int price);
 
     // Retrieves the component type (diode)
     string getComponentType() override;
@@ -131,27 +134,29 @@ public:
     friend ostream &operator<<(ostream &os, Diode &diode);
 };
 
+enum class Device {NPN, PNP, FET};
+
 /**
  * Models a transistor stock item
  */
 class Transistor : public StockItem {
 private:
-    //TODO: make static enums!
-
     // Indication of device type {NPN, PNP, FET}
-    string deviceType;
+    Device deviceType;
+
 public:
     // Transistor constructor
-    Transistor(string code, int amount, int price, string deviceType);
+    Transistor(const string &code, int amount, int price,
+               const string &deviceType);
 
     // Retrieves the component type (transistor)
     string getComponentType() override;
 
     // Retrieves the device type of this transistor
-    string getDeviceType() const;
+    Device getDeviceType() const;
 
     // Sets the device type of a transistor
-    void setDeviceType(string deviceType);
+    void setDeviceType(const string &deviceType);
 
     // Output operator for transistor
     friend ostream &operator<<(ostream &os, Transistor &transistor);
@@ -168,7 +173,8 @@ private:
 public:
 
     // IntegratedCircuit constructor
-    IntegratedCircuit(string code, int amount, int price, string description);
+    IntegratedCircuit(const string &code, int amount, int price,
+                      const string &description);
 
     // Retrieves the component type (Integrated Circuit)
     string getComponentType() override;
@@ -177,7 +183,7 @@ public:
     string getDescription() const;
 
     // Sets the description of an integrated circuit
-    void setDescription(string description);
+    void setDescription(const string &description);
 
     // Output operator for transistor
     friend ostream &
