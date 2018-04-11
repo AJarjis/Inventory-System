@@ -5,10 +5,12 @@ CMakeFiles/StockProgram.dir/nbproject/private/c_standard_headers_indexer.c.obj: 
 
 CMakeFiles/StockProgram.dir/Inventory.cpp.obj: ../Inventory.cpp
 CMakeFiles/StockProgram.dir/Inventory.cpp.obj: ../Inventory.h
+CMakeFiles/StockProgram.dir/Inventory.cpp.obj: ../StockItem.h
 
 CMakeFiles/StockProgram.dir/StockItem.cpp.obj: ../StockItem.cpp
 CMakeFiles/StockProgram.dir/StockItem.cpp.obj: ../StockItem.h
 
+CMakeFiles/StockProgram.dir/StockProgram.cpp.obj: ../Inventory.h
 CMakeFiles/StockProgram.dir/StockProgram.cpp.obj: ../StockItem.h
 CMakeFiles/StockProgram.dir/StockProgram.cpp.obj: ../StockProgram.cpp
 

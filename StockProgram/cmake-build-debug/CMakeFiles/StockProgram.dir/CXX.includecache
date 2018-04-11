@@ -7,10 +7,20 @@
 #IncludeRegexTransform: 
 
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/Inventory.cpp
+algorithm
+-
 Inventory.h
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/Inventory.h
 
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/Inventory.h
+iostream
+-
+vector
+-
+map
+-
+StockItem.h
+C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.h
 
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.cpp
 StockItem.h
@@ -25,8 +35,12 @@ iomanip
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockProgram.cpp
 cstdlib
 -
+fstream
+-
 StockItem.h
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.h
+Inventory.h
+C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/Inventory.h
 
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/nbproject/private/cpp_standard_headers_indexer.cpp
 cstdlib

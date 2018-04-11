@@ -23,12 +23,23 @@
  * @param amount                stock amount
  * @param price                 unit price of item
  */
-StockItem::StockItem(const string &code, int amount, int price) {
+StockItem::StockItem(const string &compType, const string &code, int amount,
+                     int price) {
+    this->componentType = compType;
     this->stockCode = code;
 
     this->setStockAmount(amount);
 
     this->setUnitPrice(amount);
+}
+
+/**
+ * Retrieves the component type of an item
+ *
+ * @return                      item's component type
+ */
+string StockItem::getComponentType() {
+    return this->componentType;
 }
 
 /**
@@ -95,6 +106,28 @@ void StockItem::setUnitPrice(int price) {
     }
 }
 
+/**
+ * Overloads the output operator to stream details specific to the item.
+ *
+ * @param os                    the output stream to send info to
+ * @param item                  stock item to stream info about
+ * @return                      outstream with resistor info
+ */
+ostream &operator<<(ostream &os, const StockItem &item) {
+    return item.print(os);
+}
+
+/**
+ * Compartor for comparing two item's price
+ *
+ * @param item1                 item to compare
+ * @param item2                 other item to compare
+ * @return                      true if item 1 price is less than item 2
+ */
+bool StockItem::compareByPrice(const StockItem &item1, const StockItem &item2) {
+    return item1.unitPrice < item2.unitPrice;
+}
+
 // RESISTOR CODE
 
 /**
@@ -107,17 +140,8 @@ void StockItem::setUnitPrice(int price) {
  */
 Resistor::Resistor(const string &code, int amount, int price,
                    const string &resistanceCode)
-        : StockItem(code, price, amount) {
+        : StockItem("Resistor", code, price, amount) {
     this->resistance = calculateResistance(resistanceCode);
-}
-
-/**
- * Retrieves the component type (resistor)
- *
- * @return                      string detailing type of component
- */
-string Resistor::getComponentType() {
-    return "Resistor";
 }
 
 /**
@@ -125,7 +149,7 @@ string Resistor::getComponentType() {
  *
  * @return                      resistance of item
  */
-int Resistor::getResistance() const {
+double Resistor::getResistance() const {
     return this->resistance;
 }
 
@@ -169,19 +193,17 @@ double Resistor::calculateResistance(string resistanceCode) {
 }
 
 /**
- * Overloads the output operator to stream details specific to a resistor.
+ * Provides details of resistor in output stream
  *
- * @param os                    the output stream to send info to
- * @param resistor              resistor to stream info about
- * @return                      outstream with resistor info
+ * @param os                   the output stream to send info to
+ * @return                     outstream with resistor info
  */
-ostream &operator<<(ostream &os, Resistor &resistor) {
-    return os << "Component Type: " << resistor.getComponentType() << endl
-              << "Stock Code: " << resistor.stockCode << endl
-              << "Stock Amount: " << resistor.stockAmount << endl
-              << "Unit Price: " << resistor.unitPrice << "p" << endl
-              << "Total Resistance: " << resistor.resistance << "ohms" << endl;
-    // TODO: ensure resistance and capacitance is printed out correctly
+ostream &Resistor::print(ostream &os) const {
+    return os << "Component Type: " << this->componentType << endl
+              << "Stock Code: " << this->stockCode << endl
+              << "Stock Amount: " << this->stockAmount << endl
+              << "Unit Price: " << this->unitPrice << "p" << endl
+              << "Total Resistance: " << this->resistance << "ohms" << endl;
 }
 
 // CAPACITORS CODE
@@ -196,17 +218,8 @@ ostream &operator<<(ostream &os, Resistor &resistor) {
  */
 Capacitor::Capacitor(const string &code, int amount, int price,
                      const string &capacitance)
-        : StockItem(code, price, amount) {
+        : StockItem("Capacitor", code, price, amount) {
     this->capacitance = convertToPicoFarads(capacitance);
-}
-
-/**
- * Retrieves the component type (capacitor)
- *
- * @return                      string detailing type of component
- */
-string Capacitor::getComponentType() {
-    return "Capacitor";
 }
 
 /**
@@ -272,18 +285,17 @@ double Capacitor::convertToPicoFarads(string capacitance) {
 }
 
 /**
- * Overloads the output operator to stream details specific to a capacitor.
+ * Provides details of capacitor in output stream
  *
- * @param os                        the output stream to send info to
- * @param capacitor                 capacitor to stream info about
- * @return                          outstream with capacitor info
+ * @param os                   the output stream to send info to
+ * @return                     outstream with capacitor info
  */
-ostream &operator<<(ostream &os, Capacitor &capacitor) {
-    return os << "Component Type: " << capacitor.getComponentType() << endl
-              << "Stock Code: " << capacitor.stockCode << endl
-              << "Stock Amount: " << capacitor.stockAmount << endl
-              << "Unit Price: " << capacitor.unitPrice << "p" << endl
-              << "Total Capacitance: " << capacitor.capacitance << "pf" << endl;
+ostream &Capacitor::print(ostream &os) const {
+    return os << "Component Type: " << this->componentType << endl
+              << "Stock Code: " << this->stockCode << endl
+              << "Stock Amount: " << this->stockAmount << endl
+              << "Unit Price: " << this->unitPrice << "p" << endl
+              << "Total Capacitance: " << this->capacitance << "pf" << endl;
 }
 
 // DIODE CODE
@@ -296,29 +308,21 @@ ostream &operator<<(ostream &os, Capacitor &capacitor) {
  * @param price                     unit price of item
  */
 Diode::Diode(const string &code, int amount, int price)
-        : StockItem(code, price, amount) {}
+        : StockItem("Diode", code, price, amount) {
 
-/**
-* Retrieves the component type (diode)
-*
-* @return                      string detailing type of component
-*/
-string Diode::getComponentType() {
-    return "Diode";
 }
 
 /**
- * Overloads the output operator to stream details specific to a diode.
+ * Provides details of diode in output stream
  *
- * @param os                        the output stream to send info to
- * @param diode                     diode to stream info about
- * @return                          outstream with capacitor info
+ * @param os                   the output stream to send info to
+ * @return                     outstream with diode info
  */
-ostream &operator<<(ostream &os, Diode &diode) {
-    return os << "Component Type: " << diode.getComponentType() << endl
-              << "Stock Code: " << diode.stockCode << endl
-              << "Stock Amount: " << diode.stockAmount << endl
-              << "Unit Price: " << diode.unitPrice << "p" << endl;
+ostream &Diode::print(ostream &os) const {
+    return os << "Component Type: " << this->componentType << endl
+              << "Stock Code: " << this->stockCode << endl
+              << "Stock Amount: " << this->stockAmount << endl
+              << "Unit Price: " << this->unitPrice << "p" << endl;
 }
 
 // DEVICE TYPE (ENUM) CODE
@@ -330,13 +334,13 @@ ostream &operator<<(ostream &os, Diode &diode) {
  * @param deviceType                deviceType to stream name about
  * @return                          outstream with deviceType name
  */
-ostream &operator<<(ostream &os, const Device &deviceType) {
+ostream &operator<<(ostream &os, const DeviceType &deviceType) {
     switch (deviceType) {
-        case Device::NPN :
+        case DeviceType::NPN :
             return os << "NPN";
-        case Device::PNP :
+        case DeviceType::PNP :
             return os << "PNP";
-        case Device::FET :
+        case DeviceType::FET :
             return os << "FET";
         default:
             return os;
@@ -355,17 +359,8 @@ ostream &operator<<(ostream &os, const Device &deviceType) {
  */
 Transistor::Transistor(const string &code, int amount, int price,
                        const string &deviceType)
-        : StockItem(code, amount, price) {
+        : StockItem("Transistor", code, amount, price) {
     this->setDeviceType(deviceType);
-}
-
-/**
-* Retrieves the component type (transistor)
-*
-* @return                      string detailing type of component
-*/
-string Transistor::getComponentType() {
-    return "Transistor";
 }
 
 /**
@@ -373,7 +368,7 @@ string Transistor::getComponentType() {
  *
  * @return                          device type of transistor
  */
-Device Transistor::getDeviceType() const {
+DeviceType Transistor::getDeviceType() const {
     return this->deviceType;
 }
 
@@ -383,15 +378,15 @@ Device Transistor::getDeviceType() const {
  * @param deviceType                new device type of transistor
  */
 void Transistor::setDeviceType(const string &deviceType) {
-    Device newDeviceType;
+    DeviceType newDeviceType;
 
     // Converts from string to Device enum type
     if (deviceType == "NPN") {
-        newDeviceType = Device::NPN;
+        newDeviceType = DeviceType::NPN;
     } else if (deviceType == "PNP") {
-        newDeviceType = Device::PNP;
+        newDeviceType = DeviceType::PNP;
     } else if (deviceType == "FET") {
-        newDeviceType = Device::FET;
+        newDeviceType = DeviceType::FET;
     } else {
         throw invalid_argument("Invalid device type for transistor.");
     }
@@ -400,18 +395,17 @@ void Transistor::setDeviceType(const string &deviceType) {
 }
 
 /**
- * Overloads the output operator to stream details specific to a transistor.
+ * Provides details of transistor in output stream
  *
- * @param os                        the output stream to send info to
- * @param transistor                transistor to stream info about
- * @return                          outstream with transistor info
+ * @param os                   the output stream to send info to
+ * @return                     outstream with transistor info
  */
-ostream &operator<<(ostream &os, Transistor &transistor) {
-    return os << "Component Type: " << transistor.getComponentType() << endl
-              << "Stock Code: " << transistor.stockCode << endl
-              << "Stock Amount: " << transistor.stockAmount << endl
-              << "Unit Price: " << transistor.unitPrice << "p" << endl
-              << "Device Type: " << transistor.deviceType << endl;
+ostream &Transistor::print(ostream &os) const {
+    return os << "Component Type: " << this->componentType << endl
+              << "Stock Code: " << this->stockCode << endl
+              << "Stock Amount: " << this->stockAmount << endl
+              << "Unit Price: " << this->unitPrice << "p" << endl
+              << "Device Type: " << this->deviceType << endl;
 }
 
 // INTEGRATED CIRCUITS CODE
@@ -426,17 +420,8 @@ ostream &operator<<(ostream &os, Transistor &transistor) {
  */
 IntegratedCircuit::IntegratedCircuit(const string &code, int amount, int price,
                                      const string &description)
-        : StockItem(code, amount, price) {
+        : StockItem("Integrated Circuit", code, amount, price) {
     this->description = description;
-}
-
-/**
-* Retrieves the component type (Integrated Circuit)
-*
-* @return                      string detailing type of component
-*/
-string IntegratedCircuit::getComponentType() {
-    return "Integrated Circuit";
 }
 
 /**
@@ -458,17 +443,15 @@ void IntegratedCircuit::setDescription(const string &description) {
 }
 
 /**
- * Overloads the output operator to stream details specific to an
- * integrated circuit.
+ * Provides details of integrated circuit in output stream
  *
- * @param os                        the output stream to send info to
- * @param item                      integrated circuit to stream info about
- * @return                          outstream with integrated circuit info
+ * @param os                   the output stream to send info to
+ * @return                     outstream with integrated circuit info
  */
-ostream &operator<<(ostream &os, IntegratedCircuit &integratedCircuit) {
-    return os << "Component Type: " << integratedCircuit.getComponentType()
-              << endl << "Stock Code: " << integratedCircuit.stockCode << endl
-              << "Stock Amount: " << integratedCircuit.stockAmount << endl
-              << "Unit Price: " << integratedCircuit.unitPrice << "p" << endl
-              << "Description: " << integratedCircuit.description << endl;
+ostream &IntegratedCircuit::print(ostream &os) const {
+    return os << "Component Type: " << this->componentType << endl
+              << "Stock Code: " << this->stockCode << endl
+              << "Stock Amount: " << this->stockAmount << endl
+              << "Unit Price: " << this->unitPrice << "p" << endl
+              << "Description: " << this->description << endl;
 }
