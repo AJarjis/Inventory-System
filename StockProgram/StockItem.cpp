@@ -30,7 +30,7 @@ StockItem::StockItem(const string &compType, const string &code, int amount,
 
     this->setStockAmount(amount);
 
-    this->setUnitPrice(amount);
+    this->setUnitPrice(price);
 }
 
 /**
@@ -85,7 +85,7 @@ void StockItem::setStockCode(const string &code) {
  */
 void StockItem::setStockAmount(int amount) {
     // Error checking for stock amount ensuring it must be greater than zero
-    if (amount > 0) {
+    if (amount >= 0) {
         this->stockAmount = amount;
     } else {
         throw invalid_argument("Stock amount for item must be greater than 0.");
@@ -188,7 +188,7 @@ double Resistor::calculateResistance(string resistanceCode) {
 
     // Stores final resistance value in ohms
     double ohms = stod(resistanceCode) * specialCharAmount;
-
+    
     return ohms;
 }
 
@@ -259,6 +259,7 @@ double Capacitor::convertToPicoFarads(string capacitance) {
         } else {
             // Performs conversion to picofarads once suffix is reached
             picoFaradAmount = stoi(picoFaradString);
+
 
             switch (c) {
                 case 'm' : { // Convert millifards to picofarads

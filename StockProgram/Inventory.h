@@ -37,9 +37,6 @@ public:
     // Adds an item to the inventory
     void add(StockItem *item);
 
-    // Removes an item from the inventory
-    void remove(StockItem &item);
-
     // Retrieves the amount of stock of a given component type
     int getStockCount(const string& componentType);
 

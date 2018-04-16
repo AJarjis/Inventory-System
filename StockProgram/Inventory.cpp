@@ -46,19 +46,7 @@ void Inventory::add(StockItem *item) {
  * @return                          amount of stock for the component type
  */
 int Inventory::getStockCount(const string &componentType) {
-    // TODO: get StockCount error checking may be required
     return this->stockCount[componentType];
-}
-
-/**
- * Removes an item from the inventory
- *
- * @param item                      item to remove from inventory
- */
-void Inventory::remove(StockItem &item) {
-    // TODO: remove item from inventory
-
-    this->stockCount[item.getComponentType()] -= item.getStockAmount();
 }
 
 /**

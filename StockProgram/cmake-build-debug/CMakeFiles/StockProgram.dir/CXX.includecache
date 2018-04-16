@@ -37,6 +37,10 @@ cstdlib
 -
 fstream
 -
+cstring
+-
+sstream
+-
 StockItem.h
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.h
 Inventory.h

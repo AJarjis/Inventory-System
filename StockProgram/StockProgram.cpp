@@ -14,11 +14,36 @@
 
 #include <cstdlib>
 #include <fstream>
+#include <cstring>
+#include <sstream>
+
 
 #include "StockItem.h"
 #include "Inventory.h"
 
 using namespace std;
+
+/**
+ * Trims whitespace of a given string
+ *
+ * Please note that this has been modified from a version of another trim
+ * function found here:
+ * http://www.martinbroadhurst.com/how-to-trim-a-stdstring.html
+ *
+ * @param str               string to trim whitespace of
+ * @return                  trimmed string
+ */
+string &trim(string &str) {
+    const string whiteSpace = "\t\n\v\f\r ";
+
+    // Removes whitespace from end of string
+    str.erase(str.find_last_not_of(whiteSpace) + 1);
+
+    // Removes whitespace from front of string
+    str.erase(0, str.find_first_not_of(whiteSpace));
+
+    return str;
+}
 
 /**
  * Reads and loads in an inventory file
@@ -30,47 +55,58 @@ void readInventoryFile(string &file, Inventory &inv) {
 
     if (fileStream) {
         string line;
+        const char DELIMITER = ',';
 
+        // For each line in the file, creates a stock item
         while (getline(fileStream, line)) {
-            string compType;
-            getline(fileStream, compType, ',' );
+            // Allows line to be manipulated as a stream so as to store each
+            // word on the line
+            stringstream stringStream(line);
+            string word;
 
-            string stockCode;
-            getline(fileStream, stockCode, ',' );
+            // Stores the details of a stock item from a line
+            vector<string> stockItemDetails;
 
-            cout << compType << stockCode << endl;
+            // For each word on a line trim whitespace and add to list
+            while (getline(stringStream, word, DELIMITER)) {
+                trim(word);
+                stockItemDetails.push_back(word);
+            }
 
-//            int stockAmount;
-//            getline(fileStream, stockAmount, ', ' );
-//
-//            int unitPrice;
-//            getline(fileStream, unitPrice, ', ' );
+            StockItem *newItem;
 
+            // Creates a new stock item of the correct type
+            if (stockItemDetails.at(0) == "resistor") {
+                newItem = new Resistor(stockItemDetails.at(1),
+                                       stoi(stockItemDetails.at(2)),
+                                       stoi(stockItemDetails.at(3)),
+                                       stockItemDetails.at(4));
+            } else if (stockItemDetails.at(0) == "capacitor") {
+                newItem = new Capacitor(stockItemDetails.at(1),
+                                        stoi(stockItemDetails.at(2)),
+                                        stoi(stockItemDetails.at(3)),
+                                        stockItemDetails.at(4));
+            } else if (stockItemDetails.at(0) == "transistor") {
+                newItem = new Transistor(stockItemDetails.at(1),
+                                         stoi(stockItemDetails.at(2)),
+                                         stoi(stockItemDetails.at(3)),
+                                         stockItemDetails.at(4));
+            } else if (stockItemDetails.at(0) == "diode") {
+                newItem = new Diode(stockItemDetails.at(1),
+                                    stoi(stockItemDetails.at(2)),
+                                    stoi(stockItemDetails.at(3)));
+            } else if (stockItemDetails.at(0) == "IC") {
+                newItem = new IntegratedCircuit(stockItemDetails.at(1),
+                                                stoi(stockItemDetails.at(2)),
+                                                stoi(stockItemDetails.at(3)),
+                                                stockItemDetails.at(4));
+            } else {
+                cerr << "Invalid component " << stockItemDetails.at(0)
+                     << " could not be added" << endl;
+            }
 
-//            StockItem *newItem;
-//
-//            if (compType == "Resistor") {
-//                string resistanceCode;
-//                newItem = new Resistor(stockCode, stockAmount, unitPrice,
-//                                       resistanceCode);
-//            } else if (compType == "Capacitors") {
-//                string capacitanceCode;
-//                newItem = new Capacitor(stockCode, stockAmount, unitPrice,
-//                                        capacitanceCode);
-//            } else if (compType == "Transistor") {
-//                string deviceType;
-//                newItem = new Transistor(stockCode, stockAmount, unitPrice,
-//                                         deviceType);
-//            } else if (compType == "Diode") {
-//                newItem = new Diode(stockCode, stockAmount, unitPrice);
-//            } else if (compType == "Integrated Circuit") {
-//                string description;
-//                newItem = new IntegratedCircuit(stockCode, stockAmount,
-//                                                unitPrice, description);
-//            } else {
-//                cerr << "Invalid component " << compType
-//                     << " could not be added" << endl;
-//            }
+            // Adds the newly created item to inventory
+            inv.add(newItem);
 
         }
     } else {
@@ -85,44 +121,55 @@ void readInventoryFile(string &file, Inventory &inv) {
  */
 int main(int argc, char **argv) {
     Inventory charltinsInventory;
-    string inventoryFileName = "../inventory.txt";
+    string inventoryFileName = "inventory.txt";
 
     readInventoryFile(inventoryFileName, charltinsInventory);
 
-
-//    Resistor* res = new Resistor("Code", 5, 4, "5M1");
-//    Resistor* res2 = new Resistor("Code", 5, 4, "5R1");
-//    Capacitor* cap = new Capacitor("CapCode", 5, 4, "2400uf");
-//    Diode* dio = new Diode("DioCode", 5, 4);
-//    Transistor* tra = new Transistor("tracode", 5, 4, "PNP");
-//    IntegratedCircuit* ic = new IntegratedCircuit("iccode", 5, 4, "sdfdsfdsfjkdsfhdsjkfhskfhsdfjsdhfkjs");
-//
-//    Inventory* inv = new Inventory();
-//
-//    inv->add(res);
-//    inv->add(res2);
-//    inv->add(cap);
-//    inv->add(dio);
-//    inv->add(tra);
-//    inv->add(ic);
-//
-//    inv->sortByPrice(true);
-//
-//    vector<StockItem*> results = inv->search("Diode");
-
-    // QUESTION 1
-    // charltinsInventory.sortByPrice(false);
-    // cout << "Question 1:" << endl << endl
-    //      << *charltinsInventory << endl;
+    // TODO: QUESTION 1
+//     charltinsInventory.sortByPrice(false);
+//     cout << "Question 1:" << endl << endl
+//          << charltinsInventory << endl;
 
     // QUESTION 2
-    // string compTypes[] = {"Resistor", "Capacitors", "Transistors", "Diode",
-    //                       "Integrated Circuits"};
-    // loop through comptypes calling getStockCount to get maximum
+    string compTypes[] = {"Resistor", "Capacitor", "Transistor", "Diode",
+                          "Integrated Circuit"};
+
+    // Stores details on component with highest stock amount
+    string maxComponent;
+    int maxStockAmount = 0;
+
+    // For each component type retrieves its stock amount comparing with maximum
+    for (string &type : compTypes) {
+        int stockAmount = charltinsInventory.getStockCount(type);
+
+        if (maxStockAmount < stockAmount) {
+            maxComponent = type;
+            maxStockAmount = stockAmount;
+        }
+    }
+
+    cout << "Question 2: " << maxComponent
+         << " has the largest number of components in stock with "
+         << maxStockAmount << "." << endl;
 
     // QUESTION 3
-    // Vector<Resistor*> resistorInventory = charltinsInventory.search("Resistor");
-    // loop through resistorInventory incrementing stock amount if transistor is npn
+    string componentTypeQ3 = "Transistor";
+    string deviceTypeQ3 = "NPN";
+    int totalStockQ3 = 0;
+
+    // Stores all transistors in inventory
+    vector<Transistor *> transistorInventory
+            = charltinsInventory.search(componentTypeQ3);
+
+    // For each transistor check if it is an NPN and increment the total stock
+    for (Transistor *transistor : transistorInventory) {
+        if (transistor->getDeviceType() == deviceTypeQ3) {
+            totalStockQ3 += transistor->getStockAmount();
+        }
+    }
+
+    cout << "Question 3: " << "There are " << totalStockQ3
+         << " NPN transistors in stock" << endl;
 
     // QUESTION 4
     // loop through resistorInventory incrementing total resistance if in stock
