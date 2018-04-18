@@ -34,19 +34,6 @@ Inventory::~Inventory() {
  */
 void Inventory::add(StockItem *item) {
     this->stock.push_back(item);
-
-    // Increase stock count in inventory hashmap for this component type
-    this->stockCount[item->getComponentType()] += item->getStockAmount();
-}
-
-/**
- * Retrieves the amount of stock of a given component type
- *
- * @param componentType             the component typeto check for
- * @return                          amount of stock for the component type
- */
-int Inventory::getStockCount(const string &componentType) {
-    return this->stockCount[componentType];
 }
 
 /**
@@ -61,12 +48,23 @@ int Inventory::getSize() const {
 /**
  * Sorts the inventory by price
  *
- * @param increasing                set to true to have in increasing order,
+ * @param ascending                 set to true to have in increasing order,
  *                                  false for decreasing order
  */
-void Inventory::sortByPrice(bool increasing) {
-    // TODO: ensure sort works correctly
-    sort(this->stock.begin(), this->stock.end());
+void Inventory::sortByPrice(bool ascending) {
+    // Lambda for comparing two stock items by price
+    auto comparisionMethod = [ascending](const StockItem *item1,
+                                const StockItem *item2) -> bool {
+        // Comparision method changes if wanting to sort ascending/descending
+        if (ascending == true) {
+            return item1->getUnitPrice() < item2->getUnitPrice();
+        } else {
+            return item1->getUnitPrice() > item2->getUnitPrice();
+        }
+    };
+
+    // Sorts the vector of stock items
+    sort(this->stock.begin(), this->stock.end(), comparisionMethod);
 }
 
 
@@ -90,6 +88,16 @@ vector<StockItem *> Inventory::search(const string &componentType) {
 }
 
 /**
+ * Overloads the [] operator to allow array-like access to the stock
+ *
+ * @param i                 index of element
+ * @return                  stock item stored at position
+ */
+StockItem *Inventory::operator[](int i) {
+    return this->stock[i];
+}
+
+/**
  * Overloads the output operator to stream details about the inventory.
  *
  * @param os                        the output stream to send info to
@@ -97,8 +105,9 @@ vector<StockItem *> Inventory::search(const string &componentType) {
  * @return                          outstream with inventory information
  */
 ostream &operator<<(ostream &os, Inventory &inventory) {
-    os << "Inventory Size: " << inventory.getSize() << endl;
+    os << "Inventory Size: " << inventory.getSize() << endl << endl;
 
+    // Prints each item in inventory
     for (StockItem *item : inventory.stock) {
         os << *item << endl;
     }

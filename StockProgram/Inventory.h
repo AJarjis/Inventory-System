@@ -23,10 +23,7 @@ using namespace std;
 class Inventory {
 private:
     // Stores the inventory of stockitems
-    vector<StockItem *> stock;
-
-    // Stores the stock amount for each component type
-    map<string, int> stockCount;
+    vector<StockItem*> stock;
 public:
     // Inventory Constructor
     Inventory();
@@ -37,9 +34,6 @@ public:
     // Adds an item to the inventory
     void add(StockItem *item);
 
-    // Retrieves the amount of stock of a given component type
-    int getStockCount(const string& componentType);
-
     // Retrieves the amount of items in the inventory
     int getSize() const;
 
@@ -47,7 +41,10 @@ public:
     void sortByPrice(bool decreasing);
 
     // Searches for an array of items in the inventory
-    vector<StockItem *> search(const string& searchTerm);
+    vector<StockItem*> search(const string &componentType);
+
+    // Allows for array like access to inventory
+    StockItem *operator[](int i);
 
     // Output operator for inventory
     friend ostream &operator<<(ostream &os, Inventory &inventory);

@@ -63,10 +63,6 @@ public:
     // Sets the unit price of item
     void setUnitPrice(int price);
 
-    // Comparator for comparing two item's price
-    // TODO: use comparator
-    static bool compareByPrice(const StockItem& item1, const StockItem& item2);
-
     // Provides details of this object for output stream
     // (helper method for output operator, must be overriden by sub classes)
     virtual ostream &print(ostream &os) const = 0;
@@ -99,7 +95,6 @@ public:
 
     // Provides details of resistor in output stream
     ostream &print(ostream &os) const override;
-
 };
 
 /**
@@ -114,7 +109,6 @@ public:
     // Capacitor constructor
     Capacitor(const string &code, int amount, int price,
               const string &capacitance);
-
 
     // Retrieves capacitance of capacitor
     int getCapacitance() const;
@@ -179,7 +173,6 @@ private:
     string description;
 
 public:
-
     // IntegratedCircuit constructor
     IntegratedCircuit(const string &code, int amount, int price,
                       const string &description);

@@ -19,6 +19,8 @@ vector
 -
 map
 -
+memory
+-
 StockItem.h
 C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockProgram/StockItem.h
 
@@ -36,8 +38,6 @@ C:/Users/AJarj/Git Projects/University Work/Programming 2/InventorySystem/StockP
 cstdlib
 -
 fstream
--
-cstring
 -
 sstream
 -

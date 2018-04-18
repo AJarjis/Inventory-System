@@ -117,17 +117,6 @@ ostream &operator<<(ostream &os, const StockItem &item) {
     return item.print(os);
 }
 
-/**
- * Compartor for comparing two item's price
- *
- * @param item1                 item to compare
- * @param item2                 other item to compare
- * @return                      true if item 1 price is less than item 2
- */
-bool StockItem::compareByPrice(const StockItem &item1, const StockItem &item2) {
-    return item1.unitPrice < item2.unitPrice;
-}
-
 // RESISTOR CODE
 
 /**
@@ -140,7 +129,7 @@ bool StockItem::compareByPrice(const StockItem &item1, const StockItem &item2) {
  */
 Resistor::Resistor(const string &code, int amount, int price,
                    const string &resistanceCode)
-        : StockItem("Resistor", code, price, amount) {
+        : StockItem("Resistor", code, amount, price) {
     this->resistance = calculateResistance(resistanceCode);
 }
 
@@ -169,11 +158,13 @@ void Resistor::setResistance(const string &resistanceCode) {
  * @return                      resistance of item
  */
 double Resistor::calculateResistance(string resistanceCode) {
-    int specialCharAmount = 1;
+    double specialCharAmount = 1;
+
+    // TODO: fix so resistance is calculated correctly
 
     // iterates through code converting special characters to a
     // decimal point to then be multiplied by
-    for (char &c : resistanceCode) {
+    for (char c : resistanceCode) {
         if (c == 'M') {
             c = '.';
             specialCharAmount = 1000000;
@@ -188,6 +179,8 @@ double Resistor::calculateResistance(string resistanceCode) {
 
     // Stores final resistance value in ohms
     double ohms = stod(resistanceCode) * specialCharAmount;
+
+    cout << resistanceCode << " : " << ohms << endl;
     
     return ohms;
 }
@@ -218,7 +211,7 @@ ostream &Resistor::print(ostream &os) const {
  */
 Capacitor::Capacitor(const string &code, int amount, int price,
                      const string &capacitance)
-        : StockItem("Capacitor", code, price, amount) {
+        : StockItem("Capacitor", code, amount, price) {
     this->capacitance = convertToPicoFarads(capacitance);
 }
 
@@ -259,7 +252,6 @@ double Capacitor::convertToPicoFarads(string capacitance) {
         } else {
             // Performs conversion to picofarads once suffix is reached
             picoFaradAmount = stoi(picoFaradString);
-
 
             switch (c) {
                 case 'm' : { // Convert millifards to picofarads
@@ -309,7 +301,7 @@ ostream &Capacitor::print(ostream &os) const {
  * @param price                     unit price of item
  */
 Diode::Diode(const string &code, int amount, int price)
-        : StockItem("Diode", code, price, amount) {
+        : StockItem("Diode", code, amount, price) {
 
 }
 
