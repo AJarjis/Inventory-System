@@ -13,18 +13,60 @@
 #include <algorithm>
 #include "Inventory.h"
 
+using namespace std;
+
 /**
  * Constructs an empty inventory object
  */
 Inventory::Inventory() {
-
 }
 
 /**
  * Destructs an inventory object
  */
 Inventory::~Inventory() {
-    // TODO: deconstruct inventory
+    for (StockItem *item : this->stock) {
+        delete item;
+    }
+}
+
+/**
+ * Copy constructor for inventory object
+ *
+ * @param inv           inventory to copy
+ */
+Inventory::Inventory(const Inventory &inv) {
+    // Allocates space for stock
+    this->stock.reserve(inv.getSize());
+
+    // Copies passed inventory stock into this inventory
+    for (int i=0; i < inv.getSize(); i++) {
+        this->stock.push_back(inv.stock.at(i));
+    }
+}
+
+/**
+ * Copy assignment operator for inventory object
+ *
+ * @param inv           inventory to assign
+ * @return              reference to copy of inventory object
+ */
+Inventory &Inventory::operator=(const Inventory &inv) {
+    // Checks for self-assignment
+    if (this != &inv) {
+        // Clears this inventory's stock before starting copy
+        this->stock.clear();
+
+        // Allocates space for stock
+        this->stock.reserve(inv.getSize());
+
+        // Copies passed inventory stock into this inventory
+        for (int i=0; i < inv.getSize(); i++) {
+            this->stock.push_back(inv.stock.at(i));
+        }
+    }
+
+    return *this;
 }
 
 /**

@@ -14,6 +14,8 @@
 
 #include "StockItem.h"
 
+using namespace std;
+
 // STOCKITEM CODE
 
 /**

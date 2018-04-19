@@ -18,18 +18,16 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
 /**
  * Models an abstract stock item
  */
 class StockItem {
 protected:
     // Item's component type (resistor, capacitor, diode, etc)
-    string componentType;
+    std::string componentType;
 
     // Unique stock code of an item.
-    string stockCode;
+    std::string stockCode;
 
     // Number of items left in stock.
     int stockAmount;
@@ -38,15 +36,15 @@ protected:
     int unitPrice;
 
     // StockItem Constructor
-    StockItem(const string &compType, const string &code, int amount,
+    StockItem(const std::string &compType, const std::string &code, int amount,
               int price);
 
 public:
     // Retrieves the component type of a stock item - abstract method
-    string getComponentType();
+    std::string getComponentType();
 
     // Retrieves stock code of item
-    string getStockCode() const;
+    std::string getStockCode() const;
 
     // Retrieves stock amount of item
     int getStockAmount() const;
@@ -55,7 +53,7 @@ public:
     int getUnitPrice() const;
 
     // Sets the stock code of item
-    void setStockCode(const string &code);
+    void setStockCode(const std::string &code);
 
     // Sets the stock amount of item
     void setStockAmount(int amount);
@@ -65,10 +63,10 @@ public:
 
     // Provides details of this object for output stream
     // (helper method for output operator, must be overriden by sub classes)
-    virtual ostream &print(ostream &os) const = 0;
+    virtual std::ostream &print(std::ostream &os) const = 0;
 
     // Output operator for stock items
-    friend ostream &operator<<(ostream &os, const StockItem &item);
+    friend std::ostream &operator<<(std::ostream &os, const StockItem &item);
 };
 
 /**
@@ -81,20 +79,20 @@ private:
 
 public:
     // Resistor Constructor
-    Resistor(const string &code, int amount, int price,
-             const string &resistanceCode);
+    Resistor(const std::string &code, int amount, int price,
+             const std::string &resistanceCode);
 
     // Retrieves the resistance of this resistor in ohms
     double getResistance() const;
 
     // Set resistance amount using code
-    void setResistance(const string &resistanceCode);
+    void setResistance(const std::string &resistanceCode);
 
     // Converts a resistor's code value to resistance in ohms
-    double calculateResistance(string resistanceCode);
+    double calculateResistance(std::string resistanceCode);
 
     // Provides details of resistor in output stream
-    ostream &print(ostream &os) const override;
+    std::ostream &print(std::ostream &os) const override;
 };
 
 /**
@@ -107,20 +105,20 @@ private:
 
 public:
     // Capacitor constructor
-    Capacitor(const string &code, int amount, int price,
-              const string &capacitance);
+    Capacitor(const std::string &code, int amount, int price,
+              const std::string &capacitance);
 
     // Retrieves capacitance of capacitor
     int getCapacitance() const;
 
     // Set capacitance amount of capacitor
-    void setCapacitance(string &capacitance);
+    void setCapacitance(std::string &capacitance);
 
     // Converts capacitance string into picofarads
-    double convertToPicoFarads(string capacitance);
+    double convertToPicoFarads(std::string capacitance);
 
     // Provides details of capacitor as a string
-    ostream &print(ostream &os) const override;
+    std::ostream &print(std::ostream &os) const override;
 };
 
 /**
@@ -130,10 +128,10 @@ class Diode : public StockItem {
 private:
 public:
     // Diode constructor
-    Diode(const string &code, int amount, int price);
+    Diode(const std::string &code, int amount, int price);
 
     // Provides details of diode as a string
-    ostream &print(ostream &os) const override;
+    std::ostream &print(std::ostream &os) const override;
 };
 
 // Device types for a transistor
@@ -151,17 +149,17 @@ private:
 
 public:
     // Transistor constructor
-    Transistor(const string &code, int amount, int price,
-               const string &deviceType);
+    Transistor(const std::string &code, int amount, int price,
+               const std::string &deviceType);
 
     // Retrieves the device type of this transistor
     DeviceType getDeviceType() const;
 
     // Sets the device type of a transistor
-    void setDeviceType(const string &deviceType);
+    void setDeviceType(const std::string &deviceType);
 
     // Provides details of transistor as a string
-    ostream &print(ostream &os) const override;
+    std::ostream &print(std::ostream &os) const override;
 };
 
 /**
@@ -170,21 +168,21 @@ public:
 class IntegratedCircuit : public StockItem {
 private:
     // Brief description of integrated circuit
-    string description;
+    std::string description;
 
 public:
     // IntegratedCircuit constructor
-    IntegratedCircuit(const string &code, int amount, int price,
-                      const string &description);
+    IntegratedCircuit(const std::string &code, int amount, int price,
+                      const std::string &description);
 
     // Retrieves the description of this integrated circuit
-    string getDescription() const;
+    std::string getDescription() const;
 
     // Sets the description of an integrated circuit
-    void setDescription(const string &description);
+    void setDescription(const std::string &description);
 
     // Provides details of intergrated circuit as a string
-    ostream &print(ostream &os) const override;
+    std::ostream &print(std::ostream &os) const override;
 };
 
 #endif /* STOCKITEM_H */

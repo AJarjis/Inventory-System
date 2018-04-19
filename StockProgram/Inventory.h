@@ -18,18 +18,22 @@
 #include <map>
 #include "StockItem.h"
 
-using namespace std;
-
 class Inventory {
 private:
     // Stores the inventory of stockitems
-    vector<StockItem*> stock;
+    std::vector<StockItem *> stock;
 public:
     // Inventory Constructor
     Inventory();
 
     // Inventory Destructor
     virtual ~Inventory();
+
+    // Inventory Copy Constructor
+    Inventory(const Inventory &inv);
+
+    // Inventory Copy Assignment Operator Overload
+    Inventory &operator=(const Inventory &inv);
 
     // Adds an item to the inventory
     void add(StockItem *item);
@@ -41,13 +45,13 @@ public:
     void sortByPrice(bool decreasing);
 
     // Searches for an array of items in the inventory
-    vector<StockItem*> search(const string &componentType);
+    std::vector<StockItem *> search(const std::string &componentType);
 
     // Allows for array like access to inventory
     StockItem *operator[](int i);
 
     // Output operator for inventory
-    friend ostream &operator<<(ostream &os, Inventory &inventory);
+    friend std::ostream &operator<<(std::ostream &os, Inventory &inventory);
 };
 
 #endif /* INVENTORY_H */

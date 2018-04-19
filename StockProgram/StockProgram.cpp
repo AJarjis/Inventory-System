@@ -29,23 +29,18 @@ string &trim(string &str);
 
 // Answers their respective questions from the worksheet
 void answerQuestion1(Inventory &inv);
-
 void answerQuestion2(Inventory &inv);
-
 void answerQuestion3(Inventory &inv);
-
 void answerQuestion4(Inventory &inv);
-
 void answerQuestion5(Inventory &inv);
 
-/*
- * 
- */
 int main(int argc, char **argv) {
     // Loads up inventory
     string inventoryFileName = "inventory.txt";
     Inventory charltinsInventory = readInventoryFile(inventoryFileName);
-
+    
+    charltinsInventory = charltinsInventory;
+    
 //    answerQuestion1(charltinsInventory);
 //
 //    answerQuestion2(charltinsInventory);
@@ -56,7 +51,7 @@ int main(int argc, char **argv) {
 //
 //    answerQuestion5(charltinsInventory);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 /**
@@ -150,7 +145,7 @@ void answerQuestion4(Inventory &inv) {
 
     cout << "Question 4: " << endl
          << "The total resistance of all resistors in stock is "
-         << totalResistance << "." << endl << endl;
+         << totalResistance << " ohms ." << endl << endl;
 }
 
 /**
@@ -213,40 +208,49 @@ Inventory readInventoryFile(string &file) {
                 stockItemDetails.push_back(word);
             }
 
-            StockItem *newItem;
+            try {
+                StockItem *newItem;
 
-            // Creates a new stock item of the correct type
-            if (stockItemDetails.at(0) == "resistor") {
-                newItem = new Resistor(stockItemDetails.at(1),
-                                       stoi(stockItemDetails.at(2)),
-                                       stoi(stockItemDetails.at(3)),
-                                       stockItemDetails.at(4));
-            } else if (stockItemDetails.at(0) == "capacitor") {
-                newItem = new Capacitor(stockItemDetails.at(1),
+                // Creates a new stock item of the correct type
+                if (stockItemDetails.at(0) == "resistor") {
+                    newItem = new Resistor(stockItemDetails.at(1),
+                                           stoi(stockItemDetails.at(2)),
+                                           stoi(stockItemDetails.at(3)),
+                                           stockItemDetails.at(4));
+                } else if (stockItemDetails.at(0) == "capacitor") {
+                    newItem = new Capacitor(stockItemDetails.at(1),
+                                            stoi(stockItemDetails.at(2)),
+                                            stoi(stockItemDetails.at(3)),
+                                            stockItemDetails.at(4));
+                } else if (stockItemDetails.at(0) == "transistor") {
+                    newItem = new Transistor(stockItemDetails.at(1),
+                                             stoi(stockItemDetails.at(2)),
+                                             stoi(stockItemDetails.at(3)),
+                                             stockItemDetails.at(4));
+                } else if (stockItemDetails.at(0) == "diode") {
+                    newItem = new Diode(stockItemDetails.at(1),
                                         stoi(stockItemDetails.at(2)),
-                                        stoi(stockItemDetails.at(3)),
-                                        stockItemDetails.at(4));
-            } else if (stockItemDetails.at(0) == "transistor") {
-                newItem = new Transistor(stockItemDetails.at(1),
-                                         stoi(stockItemDetails.at(2)),
-                                         stoi(stockItemDetails.at(3)),
-                                         stockItemDetails.at(4));
-            } else if (stockItemDetails.at(0) == "diode") {
-                newItem = new Diode(stockItemDetails.at(1),
-                                    stoi(stockItemDetails.at(2)),
-                                    stoi(stockItemDetails.at(3)));
-            } else if (stockItemDetails.at(0) == "IC") {
-                newItem = new IntegratedCircuit(stockItemDetails.at(1),
-                                                stoi(stockItemDetails.at(2)),
-                                                stoi(stockItemDetails.at(3)),
-                                                stockItemDetails.at(4));
-            } else {
-                cerr << "Invalid component " << stockItemDetails.at(0)
-                     << " could not be added" << endl;
+                                        stoi(stockItemDetails.at(3)));
+                } else if (stockItemDetails.at(0) == "IC") {
+                    newItem = new IntegratedCircuit(stockItemDetails.at(1),
+                                                    stoi(stockItemDetails.at(
+                                                            2)),
+                                                    stoi(stockItemDetails.at(
+                                                            3)),
+                                                    stockItemDetails.at(4));
+                } else {
+                    throw invalid_argument(
+                            "Invalid component " + stockItemDetails.at(0) +
+                            " could not be added");
+                }
+
+                // Adds the newly created item to inventory
+                inv.add(newItem);
+
+            } catch (exception e) {
+                cerr << "Failed to add item to inventory." << endl;
             }
 
-            // Adds the newly created item to inventory
-            inv.add(newItem);
 
         }
     } else {
