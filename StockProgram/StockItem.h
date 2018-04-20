@@ -89,7 +89,7 @@ public:
     void setResistance(const std::string &resistanceCode);
 
     // Converts a resistor's code value to resistance in ohms
-    double calculateResistance(std::string resistanceCode);
+    static double calculateResistance(std::string resistanceCode);
 
     // Provides details of resistor in output stream
     std::ostream &print(std::ostream &os) const override;
@@ -112,10 +112,10 @@ public:
     int getCapacitance() const;
 
     // Set capacitance amount of capacitor
-    void setCapacitance(std::string &capacitance);
+    void setCapacitance(const std::string &capacitance);
 
     // Converts capacitance string into picofarads
-    double convertToPicoFarads(std::string capacitance);
+    static double convertToPicoFarads(const std::string capacitance);
 
     // Provides details of capacitor as a string
     std::ostream &print(std::ostream &os) const override;

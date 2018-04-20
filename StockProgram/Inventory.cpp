@@ -40,7 +40,7 @@ Inventory::Inventory(const Inventory &inv) {
     this->stock.reserve(inv.getSize());
 
     // Copies passed inventory stock into this inventory
-    for (int i=0; i < inv.getSize(); i++) {
+    for (int i = 0; i < inv.getSize(); i++) {
         this->stock.push_back(inv.stock.at(i));
     }
 }
@@ -61,7 +61,7 @@ Inventory &Inventory::operator=(const Inventory &inv) {
         this->stock.reserve(inv.getSize());
 
         // Copies passed inventory stock into this inventory
-        for (int i=0; i < inv.getSize(); i++) {
+        for (int i = 0; i < inv.getSize(); i++) {
             this->stock.push_back(inv.stock.at(i));
         }
     }
@@ -96,7 +96,7 @@ int Inventory::getSize() const {
 void Inventory::sortByPrice(bool ascending) {
     // Lambda for comparing two stock items by price
     auto comparisionMethod = [ascending](const StockItem *item1,
-                                const StockItem *item2) -> bool {
+                                         const StockItem *item2) -> bool {
         // Comparision method changes if wanting to sort ascending/descending
         if (ascending == true) {
             return item1->getUnitPrice() < item2->getUnitPrice();

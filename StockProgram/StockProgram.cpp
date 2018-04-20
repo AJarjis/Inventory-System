@@ -34,22 +34,22 @@ void answerQuestion3(Inventory &inv);
 void answerQuestion4(Inventory &inv);
 void answerQuestion5(Inventory &inv);
 
+
+
 int main(int argc, char **argv) {
     // Loads up inventory
     string inventoryFileName = "inventory.txt";
     Inventory charltinsInventory = readInventoryFile(inventoryFileName);
-    
-    charltinsInventory = charltinsInventory;
-    
-//    answerQuestion1(charltinsInventory);
-//
-//    answerQuestion2(charltinsInventory);
-//
-//    answerQuestion3(charltinsInventory);
-//
-//    answerQuestion4(charltinsInventory);
-//
-//    answerQuestion5(charltinsInventory);
+
+    answerQuestion1(charltinsInventory);
+
+    answerQuestion2(charltinsInventory);
+
+    answerQuestion3(charltinsInventory);
+
+    answerQuestion4(charltinsInventory);
+
+    answerQuestion5(charltinsInventory);
 
     return EXIT_SUCCESS;
 }
@@ -145,7 +145,8 @@ void answerQuestion4(Inventory &inv) {
 
     cout << "Question 4: " << endl
          << "The total resistance of all resistors in stock is "
-         << totalResistance << " ohms ." << endl << endl;
+         << fixed << setprecision(2) << totalResistance << " ohms ." << endl
+         << endl;
 }
 
 /**

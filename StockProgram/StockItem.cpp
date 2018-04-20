@@ -21,6 +21,7 @@ using namespace std;
 /**
  * Constructs a new stock item with the given details,
  *
+ * @param compType              component type of item
  * @param code                  stock code of item
  * @param amount                stock amount
  * @param price                 unit price of item
@@ -31,7 +32,6 @@ StockItem::StockItem(const string &compType, const string &code, int amount,
     this->stockCode = code;
 
     this->setStockAmount(amount);
-
     this->setUnitPrice(price);
 }
 
@@ -132,7 +132,7 @@ ostream &operator<<(ostream &os, const StockItem &item) {
 Resistor::Resistor(const string &code, int amount, int price,
                    const string &resistanceCode)
         : StockItem("Resistor", code, amount, price) {
-    this->resistance = calculateResistance(resistanceCode);
+    this->setResistance(resistanceCode);
 }
 
 /**
@@ -150,7 +150,7 @@ double Resistor::getResistance() const {
  * @param resistanceCode        code representing resistance
  */
 void Resistor::setResistance(const string &resistanceCode) {
-    this->resistance = calculateResistance(resistanceCode);
+    this->resistance = Resistor::calculateResistance(resistanceCode);
 }
 
 /**
@@ -162,28 +162,31 @@ void Resistor::setResistance(const string &resistanceCode) {
 double Resistor::calculateResistance(string resistanceCode) {
     double specialCharAmount = 1;
 
-    // TODO: fix so resistance is calculated correctly
-
     // iterates through code converting special characters to a
     // decimal point to then be multiplied by
-    for (char c : resistanceCode) {
-        if (c == 'M') {
-            c = '.';
-            specialCharAmount = 1000000;
-        } else if (c == 'K') {
-            c = '.';
-            specialCharAmount = 1000;
-        } else if (c == 'R') {
-            c = '.';
-            specialCharAmount = 1;
+    for (char &c : resistanceCode) {
+        switch (c) {
+            case ('M'): {
+                c = '.';
+                specialCharAmount = 1000000;
+                break;
+            }
+            case ('K'): {
+                c = '.';
+                specialCharAmount = 1000;
+                break;
+            }
+            case ('R'): {
+                c = '.';
+                specialCharAmount = 1;
+                break;
+            }
         }
     }
 
     // Stores final resistance value in ohms
     double ohms = stod(resistanceCode) * specialCharAmount;
 
-    cout << resistanceCode << " : " << ohms << endl;
-    
     return ohms;
 }
 
@@ -198,7 +201,8 @@ ostream &Resistor::print(ostream &os) const {
               << "Stock Code: " << this->stockCode << endl
               << "Stock Amount: " << this->stockAmount << endl
               << "Unit Price: " << this->unitPrice << "p" << endl
-              << "Total Resistance: " << this->resistance << "ohms" << endl;
+              << "Total Resistance: " << fixed << setprecision(2)
+              << this->resistance << "ohms" << endl;
 }
 
 // CAPACITORS CODE
@@ -214,7 +218,7 @@ ostream &Resistor::print(ostream &os) const {
 Capacitor::Capacitor(const string &code, int amount, int price,
                      const string &capacitance)
         : StockItem("Capacitor", code, amount, price) {
-    this->capacitance = convertToPicoFarads(capacitance);
+    this->setCapacitance(capacitance);
 }
 
 /**
@@ -231,8 +235,8 @@ int Capacitor::getCapacitance() const {
  *
  * @param capacitance               capacitance as string e.g 100pf, 10nf
  */
-void Capacitor::setCapacitance(string &capacitance) {
-    this->capacitance = convertToPicoFarads(capacitance);
+void Capacitor::setCapacitance(const string &capacitance) {
+    this->capacitance = Capacitor::convertToPicoFarads(capacitance);
 }
 
 /**
@@ -241,13 +245,13 @@ void Capacitor::setCapacitance(string &capacitance) {
  * @param capacitance               capacitance as string e.g 100pf, 10nf
  * @return                          capacitance of item in picofarads
  */
-double Capacitor::convertToPicoFarads(string capacitance) {
+double Capacitor::convertToPicoFarads(const string capacitance) {
     string picoFaradString;
     double picoFaradAmount = 0;
 
     // Loops through each character in the capacitance string,
     // to figure out the capacitance in picofarads
-    for (char &c : capacitance) {
+    for (const char &c : capacitance) {
         // Stores number values only in picoFaradString
         if (isdigit(c)) {
             picoFaradString += c;
@@ -290,7 +294,8 @@ ostream &Capacitor::print(ostream &os) const {
               << "Stock Code: " << this->stockCode << endl
               << "Stock Amount: " << this->stockAmount << endl
               << "Unit Price: " << this->unitPrice << "p" << endl
-              << "Total Capacitance: " << this->capacitance << "pf" << endl;
+              << "Total Capacitance: " << fixed << setprecision(0)
+              << this->capacitance << "pf" << endl;
 }
 
 // DIODE CODE

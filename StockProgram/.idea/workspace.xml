@@ -23,11 +23,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StockItem.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="StockItem.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/StockItem.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="257" column="12" lean-forward="true" selection-start-line="257" selection-start-column="12" selection-end-line="258" selection-end-column="28" />
+            <state relative-caret-position="7429">
+              <caret line="437" column="2" selection-start-line="437" selection-start-column="2" selection-end-line="437" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -35,8 +35,8 @@
       <file leaf-file-name="Inventory.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Inventory.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="36" />
+            <state relative-caret-position="102">
+              <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding>
                 <element signature="e#381#400#0" expanded="true" />
               </folding>
@@ -47,8 +47,8 @@
       <file leaf-file-name="Inventory.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Inventory.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1192">
-              <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+            <state relative-caret-position="2363">
+              <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
               <folding>
                 <element signature="e#335#355#0" expanded="true" />
               </folding>
@@ -56,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StockProgram.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StockProgram.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StockProgram.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="61" selection-start-line="56" selection-end-line="61" />
+            <state relative-caret-position="629">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="e#398#416#0" expanded="true" />
               </folding>
@@ -71,8 +71,8 @@
       <file leaf-file-name="StockItem.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StockItem.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+            <state relative-caret-position="2975">
+              <caret line="175" column="54" selection-start-line="175" selection-start-column="54" selection-end-line="175" selection-end-column="54" />
               <folding>
                 <element signature="e#498#517#0" expanded="true" />
               </folding>
@@ -91,6 +91,10 @@
       <find>sor</find>
       <find>dio</find>
       <find>switch</find>
+      <find>DeviceType</find>
+      <find>convertToPicoFarads</find>
+      <find>calculateResistance</find>
+      <find>static</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -111,9 +115,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="913" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="952" />
+    <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -182,11 +186,12 @@
       <workItem from="1524047216672" duration="236000" />
       <workItem from="1524051074713" duration="16500000" />
       <workItem from="1524132373817" duration="19294000" />
+      <workItem from="1524218078946" duration="5561000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145367000" />
+    <option name="totallyTimeSpent" value="150928000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -198,13 +203,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="730" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.22526042" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.2134063" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.4979253" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.49247605" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.33103448" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32968536" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32968536" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.3208852" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -218,26 +224,25 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32968536" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.33103448" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.22526042" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.2134063" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.21751025" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32968536" />
+      <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.39280775" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.57045144" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32968536" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.33103448" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32968536" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.57045144" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -249,14 +254,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/StockItem.h</url>
-          <line>81</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="50" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="51" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -650,23 +651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StockItem.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="257" column="12" lean-forward="true" selection-start-line="257" selection-start-column="12" selection-end-line="258" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StockItem.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
-          <folding>
-            <element signature="e#498#517#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -674,33 +658,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Inventory.h">
+    <entry file="file://$PROJECT_DIR$/StockProgram.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="36" />
+        <state relative-caret-position="629">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
           <folding>
-            <element signature="e#381#400#0" expanded="true" />
+            <element signature="e#398#416#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StockItem.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2975">
+          <caret line="175" column="54" selection-start-line="175" selection-start-column="54" selection-end-line="175" selection-end-column="54" />
+          <folding>
+            <element signature="e#498#517#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Inventory.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1192">
-          <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+        <state relative-caret-position="2363">
+          <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
           <folding>
             <element signature="e#335#355#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StockProgram.cpp">
+    <entry file="file://$PROJECT_DIR$/Inventory.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="61" selection-start-line="56" selection-end-line="61" />
+        <state relative-caret-position="102">
+          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
-            <element signature="e#398#416#0" expanded="true" />
+            <element signature="e#381#400#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StockItem.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7429">
+          <caret line="437" column="2" selection-start-line="437" selection-start-column="2" selection-end-line="437" selection-end-column="2" />
         </state>
       </provider>
     </entry>
