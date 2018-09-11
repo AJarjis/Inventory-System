@@ -1,4 +1,5 @@
-#Inventory System
+# Inventory System
+
 ## What it does?
 An inventory system devloped in Java that manages the inventory of a sports equipment company.
 Has all the standard features of an inventory system such as adding, removing getting stock count, etc.
